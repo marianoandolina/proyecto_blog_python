@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
+import traceback
 import os
 import csv
 import sqlite3
@@ -33,11 +34,22 @@ def before_first_request_func():
 
 @app.route("/")
 def index():
-    return render_template('blog.html')
+    try:
+        return render_template('blog.html')
+    except:
+        return jsonify({'trace': traceback.format_exc()})
+
 
 @app.route("/login")
 def login():
-    return render_template('login.html')
+    try:
+        return render_template('login.html')
+    except:
+        return jsonify({'trace': traceback.format_exc()})
+
+@app.route("/post", methods = ['GET', 'POST'])
+
+
 
 
 if __name__ == "__main__":

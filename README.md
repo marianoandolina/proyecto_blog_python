@@ -49,17 +49,17 @@ Deberá crear la base de datos SQLite "blog.db". Utilizar SQLAlchemy para crear 
 - texto --> texto (String) (texto/contenido del post)
 
 
-## Endpoints del frontend (HTML)
+## Endpoints del frontend (HTML) # COMPLETADO #
 Dentro del archivo __app.py__ deberá implementar los siguientes endpoints que responderan a las rutas del explorador del usuario.
 
-### Endpoint login (/login)
+### Endpoint login (/login) # COMPLETADO #
 Cuando el usuario acceda a esta ruta desde el explorador, este endpoint deberá renderizar (render_template) el archivo html "login.html"
 
-### Endpoint de bienvenida o index (/)
+### Endpoint de bienvenida o index (/) # COMPLETADO #
 Cuando el usuario acceda a esta ruta desde el explorador, este endpoint deberá renderizar (render_template) el archivo html "blog.html"
 
 
-## Endpoints del backend (APIs)
+## Endpoints del backend (APIs) # COMPLETADO #
 Dentro del archivo __app.py__ deberá implementar los siguientes endpoints que responderán las peticiones GET / POST / etc:
 
 ### Endpoint post (/post)
@@ -72,7 +72,7 @@ Cuando este endpoint sea invocado por GET, el frontend le enviará por parámetr
 - Cada post lo deberá guardar en una lista de posts.
 - Al finalizar deberá retornar los posts contenido en la lista como:
 ```python
-return jsonify({"posts": posts})
+return jsonify({"posts": posts}) 
 ```
 
 ### Endpoint post (/post) para peticiones POST
