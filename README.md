@@ -62,7 +62,7 @@ Cuando el usuario acceda a esta ruta desde el explorador, este endpoint deberá 
 ## Endpoints del backend (APIs) # COMPLETADO #
 Dentro del archivo __app.py__ deberá implementar los siguientes endpoints que responderán las peticiones GET / POST / etc:
 
-### Endpoint post (/post)
+### Endpoint post (/post) # COMPLETADO #
 Dentro de este endpoint deberá aceptar peticiones del tipo "GET" y del tipo "POST". Para cada petición deberá realizar:
 
 ### Endpoint post (/post) para peticiones GET

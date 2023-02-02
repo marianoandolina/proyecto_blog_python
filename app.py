@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 
 import traceback
 import os
@@ -47,12 +47,20 @@ def login():
     except:
         return jsonify({'trace': traceback.format_exc()})
 
-# @app.route("/post", methods = ['GET', 'POST'])
-# def post():
+@app.route("/post", methods = ['GET', 'POST'])
+def post():
+    if request.methods == ['GET']:
+        try:
+            username = str(request.args.get('username'))
+            print(username)
+        except:
+            return jsonify({'trace': traceback.format_exc()})
+
+
 
     
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000)
+    app.run(host="127.0.0.1", port=5000, debug=True)
 
