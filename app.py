@@ -47,9 +47,10 @@ def login():
     except:
         return jsonify({'trace': traceback.format_exc()})
 
-@app.route("/post", methods = ['GET', 'POST'])
+# @app.route("/post", methods = ['GET', 'POST'])
+# def post():
 
-
+    
 
 
 if __name__ == "__main__":
