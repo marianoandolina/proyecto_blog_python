@@ -47,12 +47,11 @@ def login():
     except:
         return jsonify({'trace': traceback.format_exc()})
 
-@app.route("/post", methods = ['GET', 'POST'])
-def post():
+@app.route("/post/<usename>", methods = ['GET', 'POST'])
+def post(username):
     if request.methods == ['GET']:
         try:
-            username = str(request.args.get('username'))
-            print(username)
+            username = str(request.args.get('username'))            
         except:
             return jsonify({'trace': traceback.format_exc()})
 
