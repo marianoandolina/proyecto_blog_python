@@ -9,10 +9,11 @@ import sqlite3
 import sqlalchemy
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy.orm import sessionmaker, relationship, session
 
 
 app = Flask(__name__)
+
 engine = sqlalchemy.create_engine("sqlite:///blog.db")
 base = declarative_base()
 
@@ -47,13 +48,45 @@ def login():
     except:
         return jsonify({'trace': traceback.format_exc()})
 
-@app.route("/post/<usename>", methods = ['GET', 'POST'])
-def post(username):
-    if request.methods == ['GET']:
-        try:
-            username = str(request.args.get('username'))            
+@app.route("/post", methods = ['GET', 'POST'])
+def post():
+    if request.method == ['GET']:
+        try:            
+            user = str(request.args.get('username'))
+
+            Session = sessionmaker(bind=engine)
+            session = Session
+
+            posts = []      
+            query = session.query(Post).filter(post.name == user)
+            all_post = query.all().order_by(Post.id.desc().limit(2))
+
+            for post in all_post:
+                post.append(post)
+
+            return jsonify({"posts": posts})
+    
+                 
         except:
             return jsonify({'trace': traceback.format_exc()})
+        
+    if request.method == ['POST']:
+        try:
+            username = request.form('username')
+            titulo = request.form('titulo')
+            texto = request.form('texto')
+
+            Session = sessionmaker(bind=engine)
+            session = Session()
+            
+            post = Post(username=username, titulo=titulo, texto=texto)
+
+            session.add(post)
+            session.commit()
+        
+        except:
+            return jsonify({'trace': traceback.format_exc()})
+
 
 
 
