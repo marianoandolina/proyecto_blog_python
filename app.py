@@ -17,17 +17,17 @@ app = Flask(__name__)
 engine = sqlalchemy.create_engine("sqlite:///blog.db")
 base = declarative_base()
 
+class Post(base):
+    __tablename__ = 'post'
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String)
+    titulo = Column(String)
+    texto = Column(String)
+
 @app.before_first_request
 def before_first_request_func():
     # Crear aquí todas las bases de datos
-
-    class Post(base):
-        __tablename__ = 'post'
-
-        id = Column(Integer, primary_key=True)
-        username = Column(String)
-        titulo = Column(String)
-        texto = Column(String)
 
     base.metadata.create_all(engine)
     print("Base de datos generada")
@@ -48,17 +48,17 @@ def login():
     except:
         return jsonify({'trace': traceback.format_exc()})
 
-@app.route("/post", methods = ['GET', 'POST'])
+@app.route("/post", methods=['GET', 'POST'])
 def post():
     if request.method == ['GET']:
         try:            
-            user = str(request.args.get('username'))
+            usuario = str(request.args.get('username'))
 
             Session = sessionmaker(bind=engine)
             session = Session
 
             posts = []      
-            query = session.query(Post).filter(post.name == user)
+            query = session.query(Post).filter(Post.name == usuario)
             all_post = query.all().order_by(Post.id.desc().limit(2))
 
             for post in all_post:
@@ -72,9 +72,9 @@ def post():
         
     if request.method == ['POST']:
         try:
-            username = request.form('username')
-            titulo = request.form('titulo')
-            texto = request.form('texto')
+            username = request.form['username']
+            titulo = request.form['titulo']
+            texto = request.form['texto']
 
             Session = sessionmaker(bind=engine)
             session = Session()
@@ -94,5 +94,6 @@ def post():
 
 
 if __name__ == "__main__":
+
     app.run(host="127.0.0.1", port=5000, debug=True)
 
