@@ -23,13 +23,21 @@
         <h3 id="username">{{usuario}}</h3>
     </section>
     <section id="seccionPublicar">
-      <label for="titulo">Titulo:</label>      
-      <input type="text" id="titulo" name="titulo">
-      <label for="texto">Texto:</label>
-      <textarea id="texto" name="texto" placeholder="escriba su post" rows=3 minlength=10 maxlength=300></textarea>
-      <button id="publicar" path="/post">Publicar</button>
+        <form action="/post" method="post">
+        <label for="titulo">Titulo:</label>      
+        <input type="text" id="titulo" name="titulo">
+        
+        <label for="texto">Texto:</label>
+        <textarea id="texto" name="texto" placeholder="escriba su post" rows=3 minlength=10 maxlength=300></textarea>
+        
+        <button id="publicar" path="/post">Publicar</button>
+                        {{mensaje}}
+        
+        </form>    
+
     </section>
     <section id="posteos">
+    
 
     </section>
   </div>

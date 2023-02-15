@@ -67,7 +67,7 @@ Dentro de este endpoint deberá aceptar peticiones del tipo "GET" y del tipo "PO
 
 ### Endpoint post (/post) para peticiones GET
 Cuando este endpoint sea invocado por GET, el frontend le enviará por parámetros de la URL el username del usuario logeado en "request.args".
-- Deberá obtener el username de "request.args".
+- Deberá obtener el username de "request.args". # COMPLETO
 - Deberá filtrar los Posts por ese username y devolver los últimos (usar order_by descendente) tres posts realizados (limit = 3)
 - Cada post lo deberá guardar en una lista de posts.
 - Al finalizar deberá retornar los posts contenido en la lista como:

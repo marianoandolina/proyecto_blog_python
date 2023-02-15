@@ -50,31 +50,33 @@ def login():
 
 @app.route("/post", methods=['GET', 'POST'])
 def post():
-    if request.method == ['GET']:
-        try:            
+    try:
+        if request.method == 'GET':
+
             usuario = str(request.args.get('username'))
+            print(f"El usuario ingresado es: {usuario}")
+                  
 
             Session = sessionmaker(bind=engine)
             session = Session
 
-            posts = []      
+            posts = []
+
             query = session.query(Post).filter(Post.name == usuario)
             all_post = query.all().order_by(Post.id.desc().limit(2))
+            print(all_post)
 
             for post in all_post:
-                post.append(post)
-
-            return jsonify({"posts": posts})
-    
-                 
-        except:
-            return jsonify({'trace': traceback.format_exc()})
+                posts.append(post)
         
-    if request.method == ['POST']:
-        try:
-            username = request.form['username']
+            return jsonify({"posts": posts})
+
+        if request.method == 'POST':
+
+            username = str(request.args.get['username'])
             titulo = request.form['titulo']
             texto = request.form['texto']
+            print(f"El usuario es {username}, el titulo es {titulo} y el texto es {texto}")
 
             Session = sessionmaker(bind=engine)
             session = Session()
@@ -83,17 +85,12 @@ def post():
 
             session.add(post)
             session.commit()
-        
-        except:
-            return jsonify({'trace': traceback.format_exc()})
 
-
-
-
-    
-
+            return render_template('blog.html', mensaje='enviado')    
+            
+    except:
+        return jsonify({'trace': traceback.format_exc()})
 
 if __name__ == "__main__":
 
     app.run(host="127.0.0.1", port=5000, debug=True)
-
