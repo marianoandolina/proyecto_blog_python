@@ -9,7 +9,7 @@ import sqlite3
 import sqlalchemy
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship, session
+from sqlalchemy.orm import sessionmaker, relationship, session, Session
 
 
 app = Flask(__name__)
@@ -58,7 +58,7 @@ def post():
                   
 
             Session = sessionmaker(bind=engine)
-            session = Session
+            session = Session()
 
             posts = []
 
@@ -73,9 +73,9 @@ def post():
 
         if request.method == 'POST':
 
-            username = str(request.args.get['username'])
-            titulo = request.form['titulo']
-            texto = request.form['texto']
+            username = str(request.args.get('username'))
+            titulo = request.form('titulo')
+            texto = request.form('texto')
             print(f"El usuario es {username}, el titulo es {titulo} y el texto es {texto}")
 
             Session = sessionmaker(bind=engine)
