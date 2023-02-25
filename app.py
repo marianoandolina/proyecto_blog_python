@@ -63,8 +63,10 @@ def post():
             posts = []
 
             query = session.query(Post).filter(Post.name == usuario)
+            print(query)
+            
             all_post = query.all().order_by(Post.id.desc().limit(2))
-            print(all_post)
+            print(post)
 
             for post in all_post:
                 posts.append(post)
@@ -73,7 +75,9 @@ def post():
 
         if request.method == 'POST':
 
-            username = str(request.args.get['username'])
+            usuario = str(request.args.get('username'))
+            print(f'El usuario que escribio el post es: {usuario}')
+
             titulo = request.form['titulo']
             texto = request.form['texto']
             print(f"El usuario es {username}, el titulo es {titulo} y el texto es {texto}")
@@ -86,7 +90,8 @@ def post():
             session.add(post)
             session.commit()
 
-            return render_template('blog.html', mensaje='enviado')    
+            return jsonify({"id": post.id, "titulo": post.titulo, "texto": post.texto})    
+            # return render_template('blog.html', mensaje='enviado')    
             
     except:
         return jsonify({'trace': traceback.format_exc()})
