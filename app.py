@@ -62,31 +62,23 @@ def post():
 
             posts = []
 
-            query = session.query(Post).filter(Post.name == usuario)
-            print(query)
-            
-            all_post = query.all().order_by(Post.id.desc().limit(2))
-            print(post)
+            query = session.query(Post).filter(Post.username == usuario) 
+            all_post = query.all().order_by(Post.id.desc().limit(2))            
 
             for post in all_post:
                 posts.append(post)
+                print(post)
         
             return jsonify({"posts": posts})
 
         if request.method == 'POST':
 
-<<<<<<< HEAD
             usuario = str(request.args.get('username'))
             print(f'El usuario que escribio el post es: {usuario}')
 
             titulo = request.form['titulo']
             texto = request.form['texto']
-=======
-            username = str(request.args.get('username'))
-            titulo = request.form('titulo')
-            texto = request.form('texto')
->>>>>>> 231e6bd80cdd3956e73dba52b84222ee73db656c
-            print(f"El usuario es {username}, el titulo es {titulo} y el texto es {texto}")
+            print(f"El usuario es {usuario}, el titulo es {titulo} y el texto es {texto}")
 
             Session = sessionmaker(bind=engine)
             session = Session()
